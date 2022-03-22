@@ -6,4 +6,5 @@ export const ItemTypes = {
   Modulo: "modulo",
   Operand: "operand",
   Operator: "operator",
+  Expression: 'Expression'
 };

@@ -10,7 +10,6 @@ export function SnackBar({ message, isOpen, severity, setError }) {
   useEffect(() => {
     setOpen(isOpen);
   }, [isOpen]);
-  console.log("open: ", open);
   const handleClose = () => {
     setOpen(false);
     setError({});

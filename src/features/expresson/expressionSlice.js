@@ -45,7 +45,7 @@ const initialState = {
       label: "Expression",
       isDragging: false,
       iconName: "code",
-      type: ItemTypes.Operands,
+      type: ItemTypes.Expression,
     },
     {
       id: "column1",
@@ -64,6 +64,33 @@ const initialState = {
       label: "Column3",
       val: "column3",
       type: ItemTypes.Operand,
+    },
+  ],
+  droppedItems: [
+    {
+      type: "operator",
+      item: {
+        add: ["col1", "col2"],
+      },
+      isExpression: false,
+      expression: [],
+    },
+    {
+      type: "operator",
+      item: {
+        add: ["col1", "col2"],
+      },
+      isExpression: true,
+      expression: [
+        {
+          type: "operator",
+          item: {
+            add: ["col1", "col2"],
+          },
+          isExpression: false,
+          expression: [],
+        },
+      ],
     },
   ],
   expression: {},

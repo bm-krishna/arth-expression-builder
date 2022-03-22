@@ -1,15 +1,21 @@
 import * as React from "react";
-import List from "@mui/material/List";
 import { Box, MenuItem, Typography } from "@mui/material";
 import OutlinedInput from "@mui/material/OutlinedInput";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import { useDispatch } from "react-redux";
 import { addDroppedOperatorAction } from "../features/expresson/expressionSlice";
-function OperatorsFunc({ operatorItems = [] }) {
+function OperatorsFunc({
+  operatorItems = [],
+  isExpression,
+  setSelectedExpressionOperator,
+  id,
+}) {
+  
   const [operator, setOperator] = React.useState("");
   const disptach = useDispatch();
   const handleChange = (event) => {
+    
     const {
       target: { value },
     } = event;
@@ -17,7 +23,11 @@ function OperatorsFunc({ operatorItems = [] }) {
       // On autofill we get a stringified value.
       value
     );
-    disptach(addDroppedOperatorAction(value));
+    if (!isExpression) disptach(addDroppedOperatorAction(value));
+    else {
+      if(typeof setSelectedExpressionOperator === 'function')
+      setSelectedExpressionOperator(value);
+    }
   };
 
   return (
@@ -26,6 +36,8 @@ function OperatorsFunc({ operatorItems = [] }) {
         minWidth: 180,
         margin: 1,
       }}
+      key={id}
+      id={id}
     >
       <FormControl fullWidth>
         <Select
@@ -35,7 +47,7 @@ function OperatorsFunc({ operatorItems = [] }) {
           input={<OutlinedInput />}
           renderValue={(selected) => {
             if (selected.length === 0) {
-              return <em>Operator</em>;
+              return <Typography>Operator</Typography>;
             }
 
             return selected;
